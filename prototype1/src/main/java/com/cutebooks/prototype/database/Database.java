@@ -1,22 +1,19 @@
-package com.cutebooks.prototype1.database;
+package com.cutebooks.prototype.database;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
-public class DatabaseComponent {
+import com.cutebooks.prototype.domain.Book;
+
+public class Database {
 
     Logger log = LoggerFactory.getLogger(getClass());
-
-    private int lastIsbn = 3;
+    private int lastId = 3;
 
     private Map<String, Book> books = new HashMap<>();
 
@@ -33,19 +30,21 @@ public class DatabaseComponent {
         return b;
     }
 
+    public void delete(String isbn) {
+        Book b = books.get(isbn);
+        log.info("Retrieved {}", b);
+        books.remove(isbn, b);
+    }
+
     public Collection<Book> findAll() {
         return books.values();
     }
 
     public void save(Book book) {
         if (book.getIsbn() == null) {
-            lastIsbn++;
-            book.setIsbn("isbn" + lastIsbn);
+            lastId++;
+            book.setIsbn("isbn"+lastId);
         }
         books.put(book.getIsbn(), book);
-    }
-
-    public void delete(Book book) {
-        books.remove(book.getIsbn(), book);
     }
 }

@@ -1,5 +1,6 @@
-package com.cutebooks.prototype1;
-import com.cutebooks.prototype1.database.Database;
+package com.cutebooks.prototype;
+
+import com.cutebooks.prototype.database.Database;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,18 +9,22 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-@Configuration
-@EnableAutoConfiguration 
+// @SpringBootApplication // Equivale a:
+@Configuration // Para crear custom beans
+@EnableAutoConfiguration // Para cargar beans de librerías en el classpath
+// Para escanear clases anotadas con @Component, @Controller,
+// @Service, and @Repository y cargarlas como beans en memoria
 @ComponentScan
+// @ComponentScan (basePackages={"com.example.example2"})
 
-public class Prototype1Application {
+public class BookApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Prototype1Application.class, args);
+		SpringApplication.run(BookApplication.class, args);
 	}
 
 	@Bean
-	public Database crearDB() {
+	public Database database() {
 		return new Database();
 	}
 

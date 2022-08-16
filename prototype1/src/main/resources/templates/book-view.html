@@ -4,11 +4,24 @@
         
     </head>
 
-     <body>
-         <h2>View</h2>
-        <p th:text="'Title: ' + ${book.title}"></p>
-        <p th:text="'isbn: ' + ${book.isbn}"></p>
-        <p th:text="'authors: ' + ${book.authors}"></p>
+    <body>
+        <h2>View</h2>
+
+        <p th:text="|Title: ${book.title}|"></p>
+        <p th:text="|Isbn: ${book.isbn}|"></p>
+        <p>Authors: </p>
+        <ul>
+            <li th:each ="author : ${book.authors}">
+                <td th:text="${author}"></td>
+            </li>
+        </ul>
+
+        <div>
+            <nobr>
+                <a th:href="@{/book/list}">Back to List</a>
+            </nobr>
+        </div>
+
     </body>
     
 </html>

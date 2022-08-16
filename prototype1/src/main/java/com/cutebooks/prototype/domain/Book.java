@@ -1,4 +1,4 @@
-package com.cutebooks.prototype1.database;
+package com.cutebooks.prototype.domain;
 
 import java.util.List;
 

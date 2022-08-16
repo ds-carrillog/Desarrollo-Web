@@ -6,14 +6,20 @@
 </head>
 
 <body>
-    <form action="#" th:action="@{/addbook}" th:object="${book}" method="post">
-        <label for="title">Title</label>
-        <input type="text" th:field="*{title}" id="title" placeholder="Title">
-        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-        <label for="isbn">Isbn</label>
-        <input type="text" th:field="*{isbn}" id="isbn" placeholder="Isbn">
-        <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-        <input type="submit" value="Add Book">   
+    <h2>Add</h2>
+    <form action="#" th:action="@{/book}" th:object="${book}" method="post">
+        
+        <label for="book-title">Title: </label>
+        <input type="text" id="book-title">
+
+        <label for="book-isbn">Isbn: </label>
+        <input type="text" id="book-isbn">
+    
+        <label for="book-authors">Author: </label>
+        <input type="text" id="book-authors">
+
+        <button type="submit">Save</button>
+
     </form>
 
 

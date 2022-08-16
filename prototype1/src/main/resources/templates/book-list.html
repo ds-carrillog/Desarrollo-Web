@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+<!-- https://www.thymeleaf.org/doc/articles/standardurlsyntax.html -->
+<body>
+
+
+    <div th:switch="${books}">
+        <h2 th:case="null">No books yet!</h2>
+            <div th:case="*">
+                <h2>Books</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Isbn</th>
+                            <th>Authors</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.isbn}"></td>
+                        <td th:text="${book.authors}"></td>
+                        <td><a th:href="@{/edit/{isbn}(isbn=${book.isbn})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{isbn}(isbn=${book.isbn})}">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
+        <p><a href="/signup">Add a new book</a></p>
+    </div>
+
+    <!-- <h2>Books</h2>
+    <ul>
+        <li th:each="b : ${books}" th:if="${b.title}">
+            <a th:href="@{/book/edit/{isbn}(isbn=${b.isbn})}" th:text="${b.title}"></a>
+        </li>
+    </ul> -->
+
+</body>
+
+</html>
+

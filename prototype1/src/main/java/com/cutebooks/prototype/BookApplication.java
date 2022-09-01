@@ -1,7 +1,4 @@
 package com.cutebooks.prototype;
-
-import com.cutebooks.prototype.database.Database;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -21,11 +18,6 @@ public class BookApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookApplication.class, args);
-	}
-
-	@Bean
-	public Database database() {
-		return new Database();
 	}
 
 	@Bean

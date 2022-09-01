@@ -8,10 +8,15 @@
 <body>
     <h2>Edit</h2>
     <form action="#" th:action="@{/book}" th:object="${book}" method="post">
-        <input type="hidden" th:field="${book.isbn}" id="book-isbn">
+
+        <input type="hidden" th:field="${book.id}" id="book-id">
+
         <label for="book-title">Title: </label>
         <input type="text" th:field="${book.title}" id="book-title">
     
+        <label>ISBN: </label>
+        <input type="text" th:field="*{isbn}">
+
         <label for="book-authors">Author: </label>
         <input type="text" th:field="${book.authors}" id="book-authors">
         <button type="submit">Save</button>

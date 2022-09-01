@@ -1,6 +1,5 @@
 package com.cutebooks.prototype.controller;
-
-import com.cutebooks.prototype.database.Database;
+import com.cutebooks.prototype.database.BookRepository;
 import com.cutebooks.prototype.domain.Book;
 import com.cutebooks.prototype.exception.NotFoundException;
 
@@ -13,22 +12,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Controller // NO USAR @RestController
 @RequestMapping("/book")
 public class BookController {
 
+
+    Logger log = LoggerFactory.getLogger(getClass());
+
+
     @Autowired
-    Database db;
+    BookRepository bookRepository;
 
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("books", db.findAll());
+        Iterable<Book> books= bookRepository.findAll();
+        for (Book book : books){
+            log.info(book.toString());
+        }
+        model.addAttribute("books", books);
         return "book-list";
     }
 
     @GetMapping("/view/{isbn}")
     public String view2(Model model, @PathVariable String isbn) throws NotFoundException {
-        Book b = db.findByIsbn(isbn);
+        Book b= bookRepository.findByisbn(isbn);
         if (b != null) {
             model.addAttribute("book", b);
             return "book-view";
@@ -39,7 +49,7 @@ public class BookController {
 
     @GetMapping("/edit/{isbn}")
     public String edit(Model model, @PathVariable String isbn) throws NotFoundException {
-        Book b = db.findByIsbn(isbn);
+        Book b= bookRepository.findByisbn(isbn);
         if (b != null) {
             model.addAttribute("book", b);
             return "book-edit";
@@ -50,10 +60,10 @@ public class BookController {
 
     @GetMapping("/delete/{isbn}")
     public String delete(Model model, @PathVariable String isbn) throws NotFoundException {
-        Book b = db.findByIsbn(isbn);
+        Book b= bookRepository.findByisbn(isbn);
         if (b != null) {
             model.addAttribute("book", b);
-            db.delete(isbn);
+            bookRepository.delete(b);
             return "redirect:/book/list";
         } else {
             throw new NotFoundException("Cannot find book with isbn: " + isbn);
@@ -62,12 +72,14 @@ public class BookController {
 
     @GetMapping("/add")
     public String add(Model model) throws NotFoundException {
+        model.addAttribute("book", new Book(null, null, null));
         return "book-add";
     }
 
     @PostMapping("")
     public String save(@ModelAttribute Book book, Model model) {
-        db.save(book);
+        log.info(book.toString());
+        bookRepository.save(book);
         return "redirect:/book/list";
     }
 

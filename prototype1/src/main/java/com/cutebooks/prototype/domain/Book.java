@@ -1,13 +1,26 @@
 package com.cutebooks.prototype.domain;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-import java.util.List;
 
+
+@Entity
 public class Book {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+
     private String title;
     private String isbn;
-    private List<String> authors;
+    private String authors;
 
-    public Book(String title, String isbn, List<String> authors) {
+
+    public Book() {}
+
+    public Book(String title, String isbn, String authors) {
         this.title = title;
         this.isbn = isbn;
         this.authors = authors;
@@ -29,17 +42,41 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public List<String> getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<String> authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 
     @Override
     public String toString() {
         return "Book [isbn=" + isbn + ", title=" + title + ", authors=" + authors + "]";
+    }
+
+
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     

@@ -72,7 +72,7 @@ public class BookController {
 
     @GetMapping("/add")
     public String add(Model model) throws NotFoundException {
-        model.addAttribute("book", new Book(null, null, null));
+        model.addAttribute("book", new Book(null, null, null,null));
         return "book-add";
     }
 

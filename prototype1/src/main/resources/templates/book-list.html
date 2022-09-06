@@ -19,12 +19,14 @@
             <table border="1">
                 <tr>
                     <th>Isbn</th>
+                    <th>ImageUrl</th>
                     <th>Title</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 <tr th:each ="book : ${books}">
                     <td th:text="${book.isbn}"></td>
+                    <td th:text="${book.ImageUrl}"></td>
                     <td><a th:href="@{/book/view/{isbn}(isbn=${book.isbn})}" th:text="${book.title}"></a></td>
                     <td><a th:href="@{/book/edit/{isbn}(isbn=${book.isbn})}">Edit</a></td>
                     <td><a th:href="@{/book/delete/{isbn}(isbn=${book.isbn})}">Delete</a></td>

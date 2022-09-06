@@ -16,14 +16,16 @@ public class Book {
     private String title;
     private String isbn;
     private String authors;
+    private String imageUrl;
 
 
     public Book() {}
 
-    public Book(String title, String isbn, String authors) {
+    public Book(String title, String isbn, String authors, String imageUrl) {
         this.title = title;
         this.isbn = isbn;
         this.authors = authors;
+        this.imageUrl=imageUrl;
     }
 
     public String getTitle() {
@@ -55,29 +57,26 @@ public class Book {
         return "Book [isbn=" + isbn + ", title=" + title + ", authors=" + authors + "]";
     }
 
-
-
-
-
     public Long getId() {
         return id;
     }
-
-
-
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-
-
-
-
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 
     
 }

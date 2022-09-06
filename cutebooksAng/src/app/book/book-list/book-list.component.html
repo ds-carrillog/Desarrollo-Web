@@ -1,0 +1,8 @@
+<div>
+    <ul>
+        <li *ngFor="let book of books; let i = index">
+            <input type="checkbox" name="chkSelected" id="selected{{book.id}}" [(ngModel)]="selection[i]" (ngModelChange)="onSelectBook()" >
+            {{i}} {{book.title}} {{selection[i]}}
+        </li>
+    </ul>
+</div>

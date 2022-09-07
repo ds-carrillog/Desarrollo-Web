@@ -11,13 +11,10 @@ public class Book {
     @Id
     @GeneratedValue
     private Long id;
-
-
     private String title;
     private String isbn;
     private String authors;
     private String imageUrl;
-
 
     public Book() {}
 
